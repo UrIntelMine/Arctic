@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import random
 import json
-from hikari import Embed
 import requests
 import giphy_client
 from giphy_client.rest import ApiException
@@ -166,13 +165,228 @@ async def developers(ctx):
     await ctx.send(embed = em)
 
 
+@client.command()
+async def baddie(ctx):
+    percent = [
+        '1%',
+        '2%',
+        '3%',
+        '4%',
+        '5%',
+        '6%',
+        '7%',
+        '8%',
+        '9%',
+        '10%',
+        '11%',
+        '12%',
+        '13%',
+        '14%',
+        '15%',
+        '16%',
+        '17%',
+        '18%',
+        '19%',
+        '20%',
+        '21%',
+        '22%',
+        '23%',
+        '24%',
+        '25%',
+        '26%',
+        '27%',
+        '28%',
+        '29%',
+        '30%',
+        '31%',
+        '32%',
+        '33%',
+        '34%',
+        '35%',
+        '36%',
+        '37%',
+        '38%',
+        '39%',
+        '40%',
+        '41%',
+        '42%',
+        '43%',
+        '44%',
+        '45%',
+        '46%',
+        '47%',
+        '48%',
+        '49%',
+        '50%',
+        '51%',
+        '52%',
+        '53%',
+        '54%',
+        '55%',
+        '56%',
+        '57%',
+        '58%',
+        '59%',
+        '60%',
+        '61%',
+        '62%',
+        '63%',
+        '64%',
+        '65%',
+        '66%',
+        '67%',
+        '68%',
+        '69%',
+        '70%',
+        '71%',
+        '72%',
+        '73%',
+        '74%',
+        '75%',
+        '76%',
+        '77%',
+        '78%',
+        '79%',
+        '80%',
+        '81%',
+        '82%',
+        '83%',
+        '84%',
+        '85%',
+        '86%',
+        '87%',
+        '88%',
+        '89%',
+        '90%',
+        '91%',
+        '92%',
+        '93%',
+        '94%',
+        '95%',
+        '96%',
+        '97%',
+        '98%',
+        '99%',
+        '100%'
+    ]
+    em = discord.Embed(title = 'Baddie percentage', description = f'You are a {random.choice(percent)} baddie', color = ctx.author.color)
+    await ctx.send(embed = em)
+
+
+@client.command()
+async def gay(ctx):
+    percent = [
+        '1%',
+        '2%',
+        '3%',
+        '4%',
+        '5%',
+        '6%',
+        '7%',
+        '8%',
+        '9%',
+        '10%',
+        '11%',
+        '12%',
+        '13%',
+        '14%',
+        '15%',
+        '16%',
+        '17%',
+        '18%',
+        '19%',
+        '20%',
+        '21%',
+        '22%',
+        '23%',
+        '24%',
+        '25%',
+        '26%',
+        '27%',
+        '28%',
+        '29%',
+        '30%',
+        '31%',
+        '32%',
+        '33%',
+        '34%',
+        '35%',
+        '36%',
+        '37%',
+        '38%',
+        '39%',
+        '40%',
+        '41%',
+        '42%',
+        '43%',
+        '44%',
+        '45%',
+        '46%',
+        '47%',
+        '48%',
+        '49%',
+        '50%',
+        '51%',
+        '52%',
+        '53%',
+        '54%',
+        '55%',
+        '56%',
+        '57%',
+        '58%',
+        '59%',
+        '60%',
+        '61%',
+        '62%',
+        '63%',
+        '64%',
+        '65%',
+        '66%',
+        '67%',
+        '68%',
+        '69%',
+        '70%',
+        '71%',
+        '72%',
+        '73%',
+        '74%',
+        '75%',
+        '76%',
+        '77%',
+        '78%',
+        '79%',
+        '80%',
+        '81%',
+        '82%',
+        '83%',
+        '84%',
+        '85%',
+        '86%',
+        '87%',
+        '88%',
+        '89%',
+        '90%',
+        '91%',
+        '92%',
+        '93%',
+        '94%',
+        '95%',
+        '96%',
+        '97%',
+        '98%',
+        '99%',
+        '100%'
+    ]
+    em = discord.Embed(title = 'Gay percentage', description = f'You are {random.choice(percent)} gay', color = ctx.author.color)
+    await ctx.send(embed = em)
+
 
 @client.group(invoke_without_command = True)
 async def help(ctx):
     em = discord.Embed(title = 'Help', description = 'Use .help command to find information on our commands', color = ctx.author.color)
 
     em.add_field(name = 'Moderation', value = 'kick, ban, clear, developers')
-    em.add_field(name = 'Fun', value = 'ching, 8ball, gif, quote, say')
+    em.add_field(name = 'Fun', value = 'ching, 8ball, gif, quote, say, gay, baddie')
 
     await ctx.send(embed = em)
 
@@ -250,10 +464,24 @@ async def developers(ctx):
     await ctx.send(embed = em)
 
 
+@help.command()
+async def gay(ctx):
+    em = discord.Embed(title = 'Gay', description = 'Tells you how gay you are (no homo)', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.gay')
+    
+    await ctx.send(embed = em)
+
+
+@help.command()
+async def baddie(ctx):
+    em = discord.Embed(title = 'Baddie', description = 'Tells you how much of a baddie you are', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.baddie')
+    
+    await ctx.send(embed = em)
 
 
 
 
 
 
-client.run(TOKEN)
+client.run('TOKEN')
