@@ -1,3 +1,5 @@
+from pydoc import describe
+from turtle import title
 import discord
 from discord.ext import commands
 import random
@@ -5,12 +7,114 @@ import json
 import requests
 import giphy_client
 from giphy_client.rest import ApiException
-import os
-
+import animec
 
 client = commands.Bot(command_prefix = '.', intents = discord.Intents.all())
 
 client.remove_command('help')
+
+percent = [
+        '1%',
+        '2%',
+        '3%',
+        '4%',
+        '5%',
+        '6%',
+        '7%',
+        '8%',
+        '9%',
+        '10%',
+        '11%',
+        '12%',
+        '13%',
+        '14%',
+        '15%',
+        '16%',
+        '17%',
+        '18%',
+        '19%',
+        '20%',
+        '21%',
+        '22%',
+        '23%',
+        '24%',
+        '25%',
+        '26%',
+        '27%',
+        '28%',
+        '29%',
+        '30%',
+        '31%',
+        '32%',
+        '33%',
+        '34%',
+        '35%',
+        '36%',
+        '37%',
+        '38%',
+        '39%',
+        '40%',
+        '41%',
+        '42%',
+        '43%',
+        '44%',
+        '45%',
+        '46%',
+        '47%',
+        '48%',
+        '49%',
+        '50%',
+        '51%',
+        '52%',
+        '53%',
+        '54%',
+        '55%',
+        '56%',
+        '57%',
+        '58%',
+        '59%',
+        '60%',
+        '61%',
+        '62%',
+        '63%',
+        '64%',
+        '65%',
+        '66%',
+        '67%',
+        '68%',
+        '69%',
+        '70%',
+        '71%',
+        '72%',
+        '73%',
+        '74%',
+        '75%',
+        '76%',
+        '77%',
+        '78%',
+        '79%',
+        '80%',
+        '81%',
+        '82%',
+        '83%',
+        '84%',
+        '85%',
+        '86%',
+        '87%',
+        '88%',
+        '89%',
+        '90%',
+        '91%',
+        '92%',
+        '93%',
+        '94%',
+        '95%',
+        '96%',
+        '97%',
+        '98%',
+        '99%',
+        '100%'
+    ]
 
 
 def get_quote():
@@ -20,14 +124,10 @@ def get_quote():
     return(quote)
 
 
-
-
-
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name = '.help'))
-
 
 @client.command()
 async def ching(ctx):
@@ -45,24 +145,24 @@ async def ping(ctx):
 async def _8ball(ctx, *, question):
     responses = [
                 "It is certain.",
-                "It is decidedly so.",
+                "It seems like it.",
                 "Without a doubt.",
-                "Yes - definitely.",
-                "You may rely on it.",
+                "Definitely",
+                "Don't rely on it.",
                 "As I see it, yes.",
                 "Most likely.",
-                "Outlook good.",
+                "Looks good.",
                 "Yes.",
-                "Signs point to yes.",
-                "Reply hazy, try again.",
+                "The stars point to yes.",
+                "Blind rn, can't respond.",
                 "Ask again later.",
-                "Better not tell you now.",
+                "Too lazy to answer.",
                 "Cannot predict now.",
                 "Concentrate and ask again.",
                 "Don't count on it.",
                 "My reply is no.",
-                "My sources say no.",
-                "Outlook not so good.",
+                "Looks like it's no.",
+                "Damn, doesn't look good.",
                 "Very doubtful."]
     em = discord.Embed(title = '8ball', description = f'Question: {question}\nAnswer: {random.choice(responses)}', color = ctx.author.color)
     await ctx.send(embed = em)
@@ -167,226 +267,64 @@ async def developers(ctx):
 
 @client.command()
 async def baddie(ctx):
-    percent = [
-        '1%',
-        '2%',
-        '3%',
-        '4%',
-        '5%',
-        '6%',
-        '7%',
-        '8%',
-        '9%',
-        '10%',
-        '11%',
-        '12%',
-        '13%',
-        '14%',
-        '15%',
-        '16%',
-        '17%',
-        '18%',
-        '19%',
-        '20%',
-        '21%',
-        '22%',
-        '23%',
-        '24%',
-        '25%',
-        '26%',
-        '27%',
-        '28%',
-        '29%',
-        '30%',
-        '31%',
-        '32%',
-        '33%',
-        '34%',
-        '35%',
-        '36%',
-        '37%',
-        '38%',
-        '39%',
-        '40%',
-        '41%',
-        '42%',
-        '43%',
-        '44%',
-        '45%',
-        '46%',
-        '47%',
-        '48%',
-        '49%',
-        '50%',
-        '51%',
-        '52%',
-        '53%',
-        '54%',
-        '55%',
-        '56%',
-        '57%',
-        '58%',
-        '59%',
-        '60%',
-        '61%',
-        '62%',
-        '63%',
-        '64%',
-        '65%',
-        '66%',
-        '67%',
-        '68%',
-        '69%',
-        '70%',
-        '71%',
-        '72%',
-        '73%',
-        '74%',
-        '75%',
-        '76%',
-        '77%',
-        '78%',
-        '79%',
-        '80%',
-        '81%',
-        '82%',
-        '83%',
-        '84%',
-        '85%',
-        '86%',
-        '87%',
-        '88%',
-        '89%',
-        '90%',
-        '91%',
-        '92%',
-        '93%',
-        '94%',
-        '95%',
-        '96%',
-        '97%',
-        '98%',
-        '99%',
-        '100%'
-    ]
     em = discord.Embed(title = 'Baddie percentage', description = f'You are a {random.choice(percent)} baddie', color = ctx.author.color)
     await ctx.send(embed = em)
 
 
 @client.command()
 async def gay(ctx):
-    percent = [
-        '1%',
-        '2%',
-        '3%',
-        '4%',
-        '5%',
-        '6%',
-        '7%',
-        '8%',
-        '9%',
-        '10%',
-        '11%',
-        '12%',
-        '13%',
-        '14%',
-        '15%',
-        '16%',
-        '17%',
-        '18%',
-        '19%',
-        '20%',
-        '21%',
-        '22%',
-        '23%',
-        '24%',
-        '25%',
-        '26%',
-        '27%',
-        '28%',
-        '29%',
-        '30%',
-        '31%',
-        '32%',
-        '33%',
-        '34%',
-        '35%',
-        '36%',
-        '37%',
-        '38%',
-        '39%',
-        '40%',
-        '41%',
-        '42%',
-        '43%',
-        '44%',
-        '45%',
-        '46%',
-        '47%',
-        '48%',
-        '49%',
-        '50%',
-        '51%',
-        '52%',
-        '53%',
-        '54%',
-        '55%',
-        '56%',
-        '57%',
-        '58%',
-        '59%',
-        '60%',
-        '61%',
-        '62%',
-        '63%',
-        '64%',
-        '65%',
-        '66%',
-        '67%',
-        '68%',
-        '69%',
-        '70%',
-        '71%',
-        '72%',
-        '73%',
-        '74%',
-        '75%',
-        '76%',
-        '77%',
-        '78%',
-        '79%',
-        '80%',
-        '81%',
-        '82%',
-        '83%',
-        '84%',
-        '85%',
-        '86%',
-        '87%',
-        '88%',
-        '89%',
-        '90%',
-        '91%',
-        '92%',
-        '93%',
-        '94%',
-        '95%',
-        '96%',
-        '97%',
-        '98%',
-        '99%',
-        '100%'
-    ]
     em = discord.Embed(title = 'Gay percentage', description = f'You are {random.choice(percent)} gay', color = ctx.author.color)
     await ctx.send(embed = em)
 
+@client.command()
+async def neko(ctx):
+    resp = requests.get("https://nekos.best/api/v2/neko")
+    data = resp.json()
+    await ctx.send(data["results"][0]["url"])
+    
+@client.command(aliases = ['pp', 'weiner', 'peepee'])
+async def penis(ctx):
+    pp = [
+        '8D',
+        '8=D',
+        '8==D',
+        '8===D',
+        '8====D',
+        '8=====D',
+        '8======D',
+        '8=======D',
+        '8========D',
+        '8=========D',
+        '8==========D',
+        '8===========D',
+        '8============D',
+        '8=============D',
+        '8==============D',
+        '8===============D',
+        '8================D',
+        '8=================D',
+        '8=======================D',
+        '8========================D',
+        '8=========================D',
+        '8==========================D',
+        '8==================================D'
+    ]
+    llst = random.choice(pp)
+    em = discord.Embed(title = 'Penis Size', description = llst, color = ctx.author.color)
+    await ctx.send(embed = em)
+    
+@client.command()
+async def sus(ctx):
+    suckysucky = 'https://tenor.com/view/i-show-speed-speed-shake-now-suck-that-sucking-gif-24039341'
+    await ctx.send(suckysucky)
 
 @client.group(invoke_without_command = True)
 async def help(ctx):
     em = discord.Embed(title = 'Help', description = 'Use .help command to find information on our commands', color = ctx.author.color)
 
     em.add_field(name = 'Moderation', value = 'kick, ban, clear, developers')
-    em.add_field(name = 'Fun', value = 'ching, 8ball, gif, quote, say, gay, baddie')
+    em.add_field(name = 'Fun', value = 'ching, 8ball, gif, quote, say, gay, baddie, penis')
+    em.add_field(name = 'Image', value = 'gif, neko, sus')
 
     await ctx.send(embed = em)
 
@@ -479,9 +417,25 @@ async def baddie(ctx):
     
     await ctx.send(embed = em)
 
+@help.command()
+async def neko(ctx):
+    em = discord.Embed(title = 'Neko', description = 'Sends an image of a neko (only for cringe people)', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.neko')
+    await ctx.send(embed = em)
+
+@help.command()
+async def penis(ctx):
+    em = discord.Embed(title = 'Penis', description = 'Measures your penis size (spoiler alert, its 2 cm !!!', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.penis')
+    await ctx.send(embed = em)
+    
+@help.command()
+async def sus(ctx):
+    em = discord.Embed(title = 'Sus', description = 'Find out what it does haha', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.sus')
+    await ctx.send(embed = em)
 
 
 
 
-
-client.run('TOKEN')
+client.run('OTUxMjM4MTkyMjg2MjY5NDcw.Yikjmg.to5DSMkaROCNI2pTz-tPzvZF3gU')
