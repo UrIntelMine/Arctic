@@ -1,3 +1,5 @@
+from code import TOKEN
+from code import apitoken
 from pydoc import describe
 from turtle import title
 import discord
@@ -8,114 +10,12 @@ import requests
 import giphy_client
 from giphy_client.rest import ApiException
 import animec
+import datetime
+import asyncio
 
 client = commands.Bot(command_prefix = '.', intents = discord.Intents.all())
 
 client.remove_command('help')
-
-percent = [
-        '1%',
-        '2%',
-        '3%',
-        '4%',
-        '5%',
-        '6%',
-        '7%',
-        '8%',
-        '9%',
-        '10%',
-        '11%',
-        '12%',
-        '13%',
-        '14%',
-        '15%',
-        '16%',
-        '17%',
-        '18%',
-        '19%',
-        '20%',
-        '21%',
-        '22%',
-        '23%',
-        '24%',
-        '25%',
-        '26%',
-        '27%',
-        '28%',
-        '29%',
-        '30%',
-        '31%',
-        '32%',
-        '33%',
-        '34%',
-        '35%',
-        '36%',
-        '37%',
-        '38%',
-        '39%',
-        '40%',
-        '41%',
-        '42%',
-        '43%',
-        '44%',
-        '45%',
-        '46%',
-        '47%',
-        '48%',
-        '49%',
-        '50%',
-        '51%',
-        '52%',
-        '53%',
-        '54%',
-        '55%',
-        '56%',
-        '57%',
-        '58%',
-        '59%',
-        '60%',
-        '61%',
-        '62%',
-        '63%',
-        '64%',
-        '65%',
-        '66%',
-        '67%',
-        '68%',
-        '69%',
-        '70%',
-        '71%',
-        '72%',
-        '73%',
-        '74%',
-        '75%',
-        '76%',
-        '77%',
-        '78%',
-        '79%',
-        '80%',
-        '81%',
-        '82%',
-        '83%',
-        '84%',
-        '85%',
-        '86%',
-        '87%',
-        '88%',
-        '89%',
-        '90%',
-        '91%',
-        '92%',
-        '93%',
-        '94%',
-        '95%',
-        '96%',
-        '97%',
-        '98%',
-        '99%',
-        '100%'
-    ]
-
 
 def get_quote():
     response = requests.get('https://zenquotes.io/api/random')
@@ -127,7 +27,7 @@ def get_quote():
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name = '.help'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name = 'with your mums heart'))
 
 @client.command()
 async def ching(ctx):
@@ -179,13 +79,12 @@ async def kick (ctx, member : discord.Member, *, reason = None):
         await member.kick(reason = reason)
         em = discord.Embed(title = 'Kick', description = f'{member.mention} has been kicked!', color = ctx.author.color)
         await ctx.send(embed = em)
-    else:
-        await ctx.send('You do not have Administrator role')
 
 @kick.error
 async def kick_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Could you mention who you would like to kick next time?')
+        em = discord.Embed(title = 'Error', description = 'Could you mention who you would like to kick next time?', color = ctx.author.color)
+        await ctx.send(embed = em)
 
 
 
@@ -240,7 +139,7 @@ async def quote(ctx):
 @client.command()
 async def gif(ctx, *, q = "Wave"):
 
-    api_key = 'SKDqjbCEUp2FVlEaxgbs9GKz2XCH2zOz'
+    api_key = apitoken
     api_instance = giphy_client.DefaultApi()
 
     try:
@@ -267,13 +166,13 @@ async def developers(ctx):
 
 @client.command()
 async def baddie(ctx):
-    em = discord.Embed(title = 'Baddie percentage', description = f'You are a {random.choice(percent)} baddie', color = ctx.author.color)
+    em = discord.Embed(title = 'Baddie percentage', description = f'You are a {random.randrange(101)}% baddie', color = ctx.author.color)
     await ctx.send(embed = em)
 
 
 @client.command()
 async def gay(ctx):
-    em = discord.Embed(title = 'Gay percentage', description = f'You are {random.choice(percent)} gay', color = ctx.author.color)
+    em = discord.Embed(title = 'Gay percentage', description = f'You are {random.randrange(101)}% gay', color = ctx.author.color)
     await ctx.send(embed = em)
 
 @client.command()
@@ -315,14 +214,80 @@ async def penis(ctx):
     
 @client.command()
 async def sus(ctx):
-    suckysucky = 'https://tenor.com/view/i-show-speed-speed-shake-now-suck-that-sucking-gif-24039341'
-    await ctx.send(suckysucky)
+    suckysucky = [
+        'https://tenor.com/view/i-show-speed-speed-shake-now-suck-that-sucking-gif-24039341',
+        'https://tenor.com/view/scout-scout-tf2-start-running-scout-fact-steam-gif-24660136',
+        'https://tenor.com/view/audio-maker-audio-roblox-dollhouse-roleplay-discordgg-gif-22363649',
+        'https://tenor.com/view/skill-issue-sounds-like-skill-issue-monke-dancing-gif-22439519',
+        'https://tenor.com/view/prank-call-fake-call-indian-prank-call-white-airpods-gif-23973966',
+        'https://tenor.com/view/finn-big-nose-finn-keller-bea-keller-white-boy-gif-21087205']
+    lisst = random.choice(suckysucky)
+    await ctx.send(lisst)
+    
+@client.command()
+async def gstart(ctx, mins: int, * , prize: str):
+    if (ctx.message.author.permissions_in(ctx.message.channel).manage_messages):
+        em = discord.Embed(title = 'Giveaway', description = f'{prize}', color = ctx.author.color)
+        end = datetime.datetime.utcnow() + datetime.timedelta(seconds = mins*60)
+        em.add_field(name = "Ends at:", value = f'{end} UTC')
+        em.set_footer(text = 'Ends {mins} minutes from now')
+        my_msg = await ctx.send(embed = em)
+        await my_msg.add_reaction('🎉')
+        await asyncio.sleep(mins*60)
+        new_msg = await ctx.channel.fetch_message(my_msg.id)
+        users = await new_msg.reactions[0].users().flatten()
+        users.pop(users.index(client.user))
+        winner = random.choice(users)
+        e = discord.Embed(title = 'Winner!', description = f"Congratulations! {winner.mention} won {prize}!", colour = ctx.author.colour)
+        await ctx.send(embed = e)
+    
+@gstart.error
+async def gstart_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        e = discord.Embed(title = 'Error!', description = 'Missing Required Argument! Check if format is correct', color = ctx.author.color)
+        await ctx.send(embed = e)
+        
+@client.command()
+async def profile(ctx,user:discord.Member=None):
+
+    if user==None:
+        user=ctx.author
+
+    rlist = []
+    for role in user.roles:
+      if role.name != "@everyone":
+        rlist.append(role.mention)
+
+    b = ", ".join(rlist)
+
+
+    embed = discord.Embed(colour=user.color,timestamp=ctx.message.created_at)
+
+    embed.set_author(name=f"User Info - {user}"),
+    embed.set_thumbnail(url=user.avatar_url),
+    embed.set_footer(text=f'Requested by - {ctx.author}',
+  icon_url=ctx.author.avatar_url)
+
+    embed.add_field(name='Name:',value=user.display_name,inline=False)
+    embed.add_field(name='ID:',value=user.id,inline=False)
+    
+    embed.add_field(name = 'User Status:', value = user.status, inline = False)
+
+    embed.add_field(name='Created at:',value=user.created_at,inline=False)
+    embed.add_field(name='Joined at:',value=user.joined_at,inline=False)
+
+    embed.add_field(name='Top Role:',value=user.top_role.mention,inline=False)
+    embed.add_field(name=f'Roles:({len(rlist)})',value=''.join([b]),inline=False)
+
+    await ctx.send(embed=embed)
+    
+
 
 @client.group(invoke_without_command = True)
 async def help(ctx):
     em = discord.Embed(title = 'Help', description = 'Use .help command to find information on our commands', color = ctx.author.color)
 
-    em.add_field(name = 'Moderation', value = 'kick, ban, clear, developers')
+    em.add_field(name = 'Moderation', value = 'kick, ban, clear, gstart, developers')
     em.add_field(name = 'Fun', value = 'ching, 8ball, gif, quote, say, gay, baddie, penis')
     em.add_field(name = 'Image', value = 'gif, neko, sus')
 
@@ -435,7 +400,12 @@ async def sus(ctx):
     em.add_field(name = '**Syntax**', value = '.sus')
     await ctx.send(embed = em)
 
+@help.command()
+async def gstart(ctx):
+    em = discord.Embed(title = 'Gstart', description = 'This command starts a giveaway', color = ctx.author.color)
+    em.add_field(name = '**Syntax**', value = '.gstart 1 Discord Nitro.  This will start a giveaway that ends in 1 minute')
+    await ctx.send(embed = em)
 
 
 
-client.run('OTUxMjM4MTkyMjg2MjY5NDcw.Yikjmg.to5DSMkaROCNI2pTz-tPzvZF3gU')
+client.run(TOKEN)
