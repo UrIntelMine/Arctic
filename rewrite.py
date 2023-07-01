@@ -1,5 +1,5 @@
-from code import TOKEN
-from code import apitoken
+from tokencode import TOKEN
+from tokencode import apitoken
 from pydoc import describe
 from turtle import title
 import discord
@@ -266,7 +266,7 @@ async def profile(ctx,user:discord.Member=None):
     embed.set_author(name=f"User Info - {user}"),
     embed.set_thumbnail(url=user.avatar_url),
     embed.set_footer(text=f'Requested by - {ctx.author}',
-  icon_url=ctx.author.avatar_url)
+    icon_url=ctx.author.avatar_url)
 
     embed.add_field(name='Name:',value=user.display_name,inline=False)
     embed.add_field(name='ID:',value=user.id,inline=False)
@@ -280,6 +280,12 @@ async def profile(ctx,user:discord.Member=None):
     embed.add_field(name=f'Roles:({len(rlist)})',value=''.join([b]),inline=False)
 
     await ctx.send(embed=embed)
+
+@profile.error
+async def profile_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        e = discord.Embed(title = 'Error!', description = 'Missing Required Argument! Check if format is correct', color = ctx.author.color)
+        await ctx.send(embed = e)
     
 
 
